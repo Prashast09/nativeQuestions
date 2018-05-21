@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.vihaan.nativequestions.models.Question
 import kotlinx.android.synthetic.main.fragment_question.*
 
@@ -42,6 +43,8 @@ class QuestionFragment : Fragment() {
 
     private fun setQuestionView(question: Question)
     {
+        try {
+
         val en = question.en
         val question = en.value
         val options = en.options
@@ -53,5 +56,9 @@ class QuestionFragment : Fragment() {
         option3WebView.loadData(options.get(2).value, "text/html", "UTF-8")
         option4WebView.loadData(options.get(3).value, "text/html", "UTF-8")
         solutionWebView.loadData(sol.value, "text/html", "UTF-8")
+        }catch (e: Exception)
+        {
+            Toast.makeText(activity, e.message, Toast.LENGTH_LONG).show()
+        }
     }
 }
