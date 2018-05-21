@@ -50,15 +50,20 @@ class QuestionFragment : Fragment() {
         val options = en.options
         val sol = en.sol.get(0)
 
-        questionWebView.loadData(question, "text/html", "UTF-8")
-        option1WebView.loadData(options.get(0).value, "text/html", "UTF-8")
-        option2WebView.loadData(options.get(1).value, "text/html", "UTF-8")
-        option3WebView.loadData(options.get(2).value, "text/html", "UTF-8")
-        option4WebView.loadData(options.get(3).value, "text/html", "UTF-8")
-        solutionWebView.loadData(sol.value, "text/html", "UTF-8")
+        questionWebView.loadData(getHtmlValue(question), "text/html", "UTF-8")
+        option1WebView.loadData(getHtmlValue(options.get(0).value), "text/html", "UTF-8")
+        option2WebView.loadData(getHtmlValue(options.get(1).value), "text/html", "UTF-8")
+        option3WebView.loadData(getHtmlValue(options.get(2).value), "text/html", "UTF-8")
+        option4WebView.loadData(getHtmlValue(options.get(3).value), "text/html", "UTF-8")
+        solutionWebView.loadData(getHtmlValue(sol.value), "text/html", "UTF-8")
         }catch (e: Exception)
         {
             Toast.makeText(activity, e.message, Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun getHtmlValue(value: String): String {
+        var htmlValue = "<html><body>"+value+"</body></html>"
+        return htmlValue
     }
 }
