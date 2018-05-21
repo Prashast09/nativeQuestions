@@ -24,10 +24,11 @@ class QuestionsActivity : AppCompatActivity() {
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                    .setAction("Action", null).show()
 //        }
+        init()
     }
 
     private fun init() {
-
+        getQuestions()
     }
 
     private fun getQuestions() {
@@ -62,6 +63,7 @@ class QuestionsActivity : AppCompatActivity() {
             val bundle = Bundle()
             bundle.putParcelable(QuestionFragment.KEY_QUESTION, question)
             fragments.add(QuestionFragment.newInstance(bundle))
+            break
         }
         return fragments
     }

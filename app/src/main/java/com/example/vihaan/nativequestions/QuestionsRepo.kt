@@ -18,7 +18,8 @@ class QuestionsRepo{
         val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
 
         val retrofit = Retrofit.Builder()
-                .baseUrl("https://api.testbook.com/api/v2")
+//                .baseUrl("https://api.testbook.com/api/v2/")
+                .baseUrl("https://api.myjson.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
