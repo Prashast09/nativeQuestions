@@ -1,5 +1,6 @@
 package com.example.vihaan.nativequestions
 
+import com.example.vihaan.nativequestions.models.QuestionsResponse
 import io.reactivex.Single
 import okhttp3.ResponseBody
 import retrofit2.http.GET
@@ -11,5 +12,5 @@ interface  QuestionService{
         @GET("https://api.myjson.com/bins/zl62i")
         fun getQuestions(
 
-        ): Single<ResponseBody>
+        ): Single<QuestionsResponse>
 }

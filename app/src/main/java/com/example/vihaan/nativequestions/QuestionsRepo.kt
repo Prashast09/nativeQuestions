@@ -1,5 +1,8 @@
 package com.example.vihaan.nativequestions
 
+import com.example.vihaan.nativequestions.models.Question
+import com.example.vihaan.nativequestions.models.QuestionsResponse
+import io.reactivex.Single
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -24,8 +27,13 @@ class QuestionsRepo{
         questionService = retrofit.create(QuestionService::class.java)
     }
 
-    fun getQuestions(){
+    fun getQuestions(): Single<MutableList<Question>?>? {
+        return questionService.getQuestions()
+                .map { response -> getArray(response)}
+    }
 
+    fun getArray(response: QuestionsResponse): MutableList<Question>? {
+        return response.data.questions
     }
 
 }

@@ -1,10 +1,13 @@
 
 package com.example.vihaan.nativequestions.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Sol {
+public class Sol implements Parcelable {
 
     @SerializedName("value")
     @Expose
@@ -84,4 +87,44 @@ public class Sol {
         this.updatedon = updatedon;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.value);
+        dest.writeString(this.type);
+        dest.writeString(this.name);
+        dest.writeValue(this.id);
+        dest.writeString(this.uid);
+        dest.writeString(this.addedon);
+        dest.writeString(this.updatedon);
+    }
+
+    public Sol() {
+    }
+
+    protected Sol(Parcel in) {
+        this.value = in.readString();
+        this.type = in.readString();
+        this.name = in.readString();
+        this.id = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.uid = in.readString();
+        this.addedon = in.readString();
+        this.updatedon = in.readString();
+    }
+
+    public static final Parcelable.Creator<Sol> CREATOR = new Parcelable.Creator<Sol>() {
+        @Override
+        public Sol createFromParcel(Parcel source) {
+            return new Sol(source);
+        }
+
+        @Override
+        public Sol[] newArray(int size) {
+            return new Sol[size];
+        }
+    };
 }

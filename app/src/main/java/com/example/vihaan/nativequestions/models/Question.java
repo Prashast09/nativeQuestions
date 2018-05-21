@@ -1,10 +1,13 @@
 
 package com.example.vihaan.nativequestions.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Question {
+public class Question implements Parcelable {
 
     @SerializedName("_id")
     @Expose
@@ -51,4 +54,38 @@ public class Question {
         this.hn = hn;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.type);
+        dest.writeParcelable(this.en, flags);
+        dest.writeParcelable(this.hn, flags);
+    }
+
+    public Question() {
+    }
+
+    protected Question(Parcel in) {
+        this.id = in.readString();
+        this.type = in.readString();
+        this.en = in.readParcelable(En.class.getClassLoader());
+        this.hn = in.readParcelable(Hn.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<Question> CREATOR = new Parcelable.Creator<Question>() {
+        @Override
+        public Question createFromParcel(Parcel source) {
+            return new Question(source);
+        }
+
+        @Override
+        public Question[] newArray(int size) {
+            return new Question[size];
+        }
+    };
 }

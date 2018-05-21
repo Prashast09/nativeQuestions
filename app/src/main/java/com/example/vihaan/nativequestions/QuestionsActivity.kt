@@ -1,13 +1,17 @@
 package com.example.vihaan.nativequestions
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
+import com.example.vihaan.nativequestions.models.Question
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import java.util.ArrayList
 
 class QuestionsActivity : AppCompatActivity() {
 
@@ -22,19 +26,44 @@ class QuestionsActivity : AppCompatActivity() {
 //        }
     }
 
-    private fun init(){
+    private fun init() {
 
     }
 
-    private fun getQuestions(){
+    private fun getQuestions() {
+        QuestionsRepo().getQuestions()
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribe(
+                        {
+                            it?.let {
+                                setQuestions(it)
+                            }
+                        }, {
 
+                })
+    }
+
+    private fun setQuestions(it: MutableList<Question>) {
+        initViewPager(it)
     }
 
     lateinit var adapter: PagerAdapter
-    private fun initViewPager()
-    {
-//        adapter = PagerAdapter(supportFragmentManager,getFragments())
+    private fun initViewPager(it: MutableList<Question>) {
+        adapter = PagerAdapter(supportFragmentManager, getFragments(it))
         viewPager.adapter = adapter
+    }
+
+    private fun getFragments(it: MutableList<Question>): ArrayList<Fragment> {
+        val fragments = arrayListOf<Fragment>()
+
+        for(question in it)
+        {
+            val bundle = Bundle()
+            bundle.putParcelable(QuestionFragment.KEY_QUESTION, question)
+            fragments.add(QuestionFragment.newInstance(bundle))
+        }
+        return fragments
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
