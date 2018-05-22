@@ -71,11 +71,17 @@ class QuestionFragment : Fragment() {
 
     private fun initWebViews(){
         questionWebView.settings.javaScriptEnabled = true
+        questionWebView.isVerticalScrollBarEnabled= false
         option1WebView.settings.javaScriptEnabled = true
+        option1WebView.isVerticalScrollBarEnabled= false
         option2WebView.settings.javaScriptEnabled = true
+        option2WebView.isVerticalScrollBarEnabled = false
         option3WebView.settings.javaScriptEnabled = true
+        option3WebView.isVerticalScrollBarEnabled= false
         option4WebView.settings.javaScriptEnabled = true
+        option4WebView.isVerticalScrollBarEnabled = false
         solutionWebView.settings.javaScriptEnabled = true
+        solutionWebView.isVerticalScrollBarEnabled = false
     }
 
     @SuppressWarnings("deprecation")
