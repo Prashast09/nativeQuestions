@@ -1,7 +1,9 @@
 package com.example.vihaan.nativequestions
 
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,8 +64,17 @@ class QuestionFragment : Fragment() {
         }
     }
 
+    @SuppressWarnings("deprecation")
     private fun getHtmlValue(value: String): String {
-        var htmlValue = "<html><body>"+value+"</body></html>"
+//        var htmlValue = "<html><body>"+value+"</body></html>"
+//        var htmlValue = "<html><body>"+ Html.fromHtml(value)+"</body></html>"
+//        var htmlValue = "<html><body>"+ Html.fromHtml(value,)+"</body></html>"
+        var htmlValue:String
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            htmlValue = Html.fromHtml(value, Html.FROM_HTML_MODE_LEGACY).toString();
+        } else {
+            htmlValue = Html.fromHtml(value).toString();
+        }
         return htmlValue
     }
 }
