@@ -2,16 +2,15 @@ package com.example.vihaan.nativequestions
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.example.vihaan.nativequestions.models.Question
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import java.util.ArrayList
+import java.util.*
 
 class QuestionsActivity : AppCompatActivity() {
 
@@ -63,6 +62,7 @@ class QuestionsActivity : AppCompatActivity() {
             val bundle = Bundle()
             bundle.putParcelable(QuestionFragment.KEY_QUESTION, question)
             fragments.add(QuestionFragment.newInstance(bundle))
+            break
         }
         return fragments
     }
