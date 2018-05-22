@@ -93,7 +93,8 @@ class QuestionFragment : Fragment() {
     }
 
     private fun getMathJaxScript(): String {
-        return "<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>"
+        return "<script type=\"text/x-mathjax-config\">MathJax.Hub.Config({messageStyle: 'none',tex2jax: {preview: 'none'}});\n</script>"+
+                "<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>"
     }
 
     private fun getJaxScript(): String {
