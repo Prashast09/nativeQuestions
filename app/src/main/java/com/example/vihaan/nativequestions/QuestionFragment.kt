@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.vihaan.nativequestions.R.id.*
 import com.example.vihaan.nativequestions.models.Question
 import com.testbook.tbapp.html.HtmlEscape
 import kotlinx.android.synthetic.main.fragment_question.*
@@ -54,6 +53,8 @@ class QuestionFragment : Fragment() {
             val options = en.options
             val sol = en.sol.get(0)
 
+            initWebViews()
+
             val htmlValue = getHtmlValue(question)
             val correctImagesSrc = correctImagesSrc(htmlValue)
 //        questionWebView.loadData(getHtmlValue(correctImagesSrc(question)!!), "text/html", "UTF-8")
@@ -68,11 +69,20 @@ class QuestionFragment : Fragment() {
         }
     }
 
+    private fun initWebViews(){
+        questionWebView.settings.javaScriptEnabled = true
+        option1WebView.settings.javaScriptEnabled = true
+        option2WebView.settings.javaScriptEnabled = true
+        option3WebView.settings.javaScriptEnabled = true
+        option4WebView.settings.javaScriptEnabled = true
+        solutionWebView.settings.javaScriptEnabled = true
+    }
+
     @SuppressWarnings("deprecation")
     private fun getHtmlValue(value: String): String {
 //        var htmlValue = "<html><body>"+value+"</body></html>"
 //        var htmlValue = "<html><body>"+ Html.fromHtml(value)+"</body></html>"
-        var htmlValue = "<html><body>"+ HtmlEscape.unescapeHtml(value)+"</body></html>"
+        var htmlValue = "<html><head>"+getMathJaxScript()+"</head><body>"+ HtmlEscape.unescapeHtml (value) +"</body></html>"
 //        var htmlValue: String
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 //            htmlValue = Html.fromHtml(value, Html.FROM_HTML_MODE_LEGACY).toString();
@@ -81,6 +91,26 @@ class QuestionFragment : Fragment() {
 //        }
         return htmlValue
     }
+
+    private fun getMathJaxScript(): String {
+        return "<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>"
+    }
+
+    private fun getJaxScript(): String {
+        return ("<script type='text/x-mathjax-config'>"
+                + "MathJax.Hub.Config({ "
+                + "showMathMenu:false, "
+                + "jax:['input/TeX','output/SVG'], "
+                + "extensions:['tex2jax.js'], "
+                + "TeX:{ extensions:['AMSmath.js','AMSsymbols.js', 'noErrors.js','noUndefined.js'] }, "
+                + "'HTML-CSS': { linebreaks: { automatic: true } },"
+                + "SVG: { linebreaks: { automatic: true } }"
+                + "}); </script>"
+                + "<script type='text/javascript' "
+                + "src='file:///android_asset/mathjax/MathJax.js'"
+                + "></script>")
+    }
+
 
     fun correctImagesSrc(input: String): String? {
         var input = input

@@ -62,7 +62,7 @@ class QuestionsActivity : AppCompatActivity() {
             val bundle = Bundle()
             bundle.putParcelable(QuestionFragment.KEY_QUESTION, question)
             fragments.add(QuestionFragment.newInstance(bundle))
-            break
+//            break
         }
         return fragments
     }
