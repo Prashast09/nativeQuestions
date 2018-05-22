@@ -1,0 +1,70 @@
+<html>
+<div class="spin"><div></div></div>
+<div class="spin spin2"><div></div></div>
+</html>
+
+<style>
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    opacity: 0;
+    border-width: 8px;
+  }
+  20% {
+    -webkit-transform: scale(0.6);
+    transform: scale(0.6);
+    opacity: .8;
+    border-width: 4px;
+  }
+  90% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    opacity: 0;
+    border-width: 8px;
+  }
+  20% {
+    -webkit-transform: scale(0.6);
+    transform: scale(0.6);
+    opacity: .8;
+    border-width: 4px;
+  }
+  90% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+.spin {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+}
+.spin div {
+  width: 100%;
+  vertical-align: middle;
+  display: inline-block;
+  border-radius: 50%;
+  border: 4px solid #16d4d9!important;
+  -webkit-animation: spin 1.3s linear infinite;
+  animation: spin 1.3s linear infinite;
+  box-sizing: border-box;
+  opacity: 0;
+  height: 100%;
+}
+.spin2 {
+  margin: -60px auto 20px;
+}
+.spin2 div {
+  -webkit-animation-delay: .65s;
+  animation-delay: .65s;
+}
+</style>
+

@@ -1,0 +1,153 @@
+<main class="clearfix" style="margin-bottom:20px; background:{reported_status_card_color};">
+    <div class="clearfix" id='status'>
+        <h4>Your Reports</h4>
+        <p>{reported_date}</p>
+    </div>
+    <div class="clearfix" id='comments'>
+        <input id="toggle" type="checkbox">
+        <div class="clearfix" id='top_comments'>
+            <section class="clearfix">
+                <div class="clearfix issue_comment">
+                    <p><b>Issue: </b>{comment1_header}</p>
+                    <p><b>Comments: </b>{comment1_message}</p>
+                </div>
+                <div class="clearfix issue_comment">
+                    <p style="display:{should_sec_comment_display};">
+                        <b>Issue: </b>{comment2_header}
+                    </p>
+                    <p style="display:{should_sec_comment_display};">
+                        <b>Comments: </b>{comment2_message}</p>
+                </div>
+            </section>
+        </div>
+
+        <div id="expand">
+            <section>
+                <!--<p><b>Wrong Answer: </b> Yolo</p>-->
+                {secondary_comments}
+            </section>
+        </div>
+        <label for="toggle"></label>
+        <div class="clearfix">
+            <div id="button_status" class="button">
+                <img id="status_image" height="20px" width="20px"
+                     src="{reported_question_status_image}" style="float:left;"/>
+                <div class="status_text">{reported_status}</div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<style>
+
+.clearfix::before,
+.clearfix::after {
+  content: "";
+  display: table;
+}
+
+.clearfix::after {
+  clear: both;
+}
+
+#status h4 {
+  margin-left: 15px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  float:left;
+}
+
+.issue_comment{
+  margin-bottom: 10px;
+}
+
+#status p {
+  float:right;
+  margin-right:10px;
+  margin-top:10px;
+  font-size: 9px;
+  color:gray;
+}
+
+#status {
+  clear:both;
+}
+
+#comments {
+  clear:both;
+  margin-left:15px;
+}
+
+input {
+  display: none;
+  visibility: hidden;
+}
+
+label {
+  display: {expand_should_display};
+  margin-right: 0.5em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  text-align: left;
+  color: #009AC4;
+}
+
+label:hover {
+  color: #009AC4;
+}
+
+label::before {
+  font-size: 8px;
+  padding: 5px 5px 5px 5px;
+  content: "READ MORE";
+  vertical-align: text-top;
+  display: inline-block;
+  float:left;
+  width: 50px;
+  height: 20px;
+}
+
+#expand {
+  max-height: 0px;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  color: #000;
+}
+
+#toggle:checked ~ #expand {
+  overflow-y:scroll;
+  max-height: {expanded_height_for_expand_div};
+}
+
+.button {
+    background-color: {reported_status_color};
+    border: none;
+    float: right;
+    text-align: center;
+    display: inline-block;
+    font-size: 12px;
+}
+
+#status_image {
+    border: none;
+    padding: 5px 5px 5px 5px;
+    float: right;
+    color:white;
+    text-align: center;
+    display: inline-block;
+    font-size: 12px;
+}
+
+.status_text {
+    padding: 7px 5px 5px 0px;
+    text-align: center;
+    display: inline-block;
+    font-size: 13px;
+    color:white;
+}
+
+#toggle:checked ~ label::before {
+  content: "READ LESS";
+  padding: 5px 5px 5px 5px;
+}
+</style>
